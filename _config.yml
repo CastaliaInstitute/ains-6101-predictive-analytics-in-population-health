@@ -1,0 +1,23 @@
+title: AINS6101 Predictive Analytics in Population Health
+author: Castalia Institute
+only_build_toc_files: true
+exclude_patterns:
+  - .venv/**
+  - _build/**
+  - site/**
+  - .devcontainer/**
+execute:
+  execute_notebooks: force
+launch_buttons:
+  thebe: true
+parse:
+  myst_enable_extensions:
+    - colon_fence
+    - deflist
+    - dollarmath
+    - html_admonition
+    - html_image
+sphinx:
+  config:
+    html_title: AINS6101 Predictive Analytics in Population Health
+    html_baseurl: https://ains6101.courses.castalia.institute/book/

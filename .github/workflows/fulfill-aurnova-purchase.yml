@@ -1,0 +1,52 @@
+name: Fulfill Aurnova Purchase
+
+on:
+  workflow_dispatch:
+    inputs:
+      order_id:
+        description: "Castalia order or entitlement id"
+        required: true
+      customer_name:
+        description: "Purchasing institution/customer"
+        required: false
+        default: ""
+      target_org:
+        description: "Destination GitHub organization"
+        required: true
+        default: "Aurnova"
+      target_repo:
+        description: "Destination instructor repository"
+        required: true
+        default: "ain6003-instructor"
+      dry_run:
+        description: "Validate without creating/updating the Aurnova repo"
+        required: true
+        type: boolean
+        default: true
+
+jobs:
+  fulfill:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Fulfill purchase
+        env:
+          GH_TOKEN: ${{ secrets.AURNOVA_GH_TOKEN }}
+          CASTALIA_ORDER_ID: ${{ inputs.order_id }}
+          CASTALIA_CUSTOMER_NAME: ${{ inputs.customer_name }}
+        run: |
+          args=(
+            --target-org "${{ inputs.target_org }}"
+            --target-repo "${{ inputs.target_repo }}"
+          )
+          if [[ "${{ inputs.dry_run }}" == "false" ]]; then
+            args+=(--live)
+          fi
+          python scripts/aurnova/deploy_to_aurnova.py "${args[@]}"

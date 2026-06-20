@@ -1,0 +1,49 @@
+name: Sync Populi Roster
+
+on:
+  workflow_dispatch:
+    inputs:
+      course_offering_id:
+        description: "Populi course offering id"
+        required: true
+      output_path:
+        description: "Roster CSV path"
+        required: true
+        default: "rosters/current.csv"
+      dry_run:
+        description: "Fetch and validate without committing roster file"
+        required: true
+        type: boolean
+        default: true
+
+jobs:
+  sync-roster:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch roster from Populi
+        env:
+          POPULI_API_BASE: ${{ secrets.POPULI_API_BASE }}
+          POPULI_API_KEY: ${{ secrets.POPULI_API_KEY }}
+        run: |
+          args=(
+            --course-offering-id "${{ inputs.course_offering_id }}"
+            --output-path "${{ inputs.output_path }}"
+          )
+          if [[ "${{ inputs.dry_run }}" == "true" ]]; then
+            args+=(--dry-run)
+          fi
+          python scripts/aurnova/sync_populi_roster.py "${args[@]}"
+      - name: Commit roster
+        if: ${{ inputs.dry_run == false }}
+        run: |
+          git config user.name "aurnova-automation"
+          git config user.email "automation@aurnova.ai"
+          git add "${{ inputs.output_path }}"
+          git commit -m "Sync Populi roster" || echo "No roster changes"
+          git push

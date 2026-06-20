@@ -1,0 +1,65 @@
+name: Create Aurnova Cohort
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_org:
+        description: "Aurnova GitHub organization"
+        required: true
+        default: "Aurnova"
+      course_code:
+        description: "Course code"
+        required: true
+        default: "ain6003"
+      cohort:
+        description: "Cohort slug, e.g. fall2026"
+        required: true
+      canonical_course_repo:
+        description: "Canonical course repo, owner/name"
+        required: true
+        default: "Aurnova/ain6003-course"
+      assignment_template_prefix:
+        description: "Canonical assignment template prefix"
+        required: true
+        default: "Aurnova/ain6003-assignment-m"
+      module_count:
+        description: "Number of module assignment templates"
+        required: true
+        default: "8"
+      instructor_github_users:
+        description: "Comma-separated instructor GitHub usernames"
+        required: false
+        default: ""
+      dry_run:
+        description: "Print planned operations without changing GitHub"
+        required: true
+        type: boolean
+        default: true
+
+jobs:
+  create-cohort:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Create cohort repos and teams
+        env:
+          GH_TOKEN: ${{ secrets.AURNOVA_GH_TOKEN }}
+        run: |
+          args=(
+            --target-org "${{ inputs.target_org }}"
+            --course-code "${{ inputs.course_code }}"
+            --cohort "${{ inputs.cohort }}"
+            --canonical-course-repo "${{ inputs.canonical_course_repo }}"
+            --assignment-template-prefix "${{ inputs.assignment_template_prefix }}"
+            --module-count "${{ inputs.module_count }}"
+            --instructor-github-users "${{ inputs.instructor_github_users }}"
+          )
+          if [[ "${{ inputs.dry_run }}" == "true" ]]; then
+            args+=(--dry-run)
+          fi
+          python scripts/aurnova/create_cohort.py "${args[@]}"

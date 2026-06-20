@@ -1,0 +1,9 @@
+jupyter-book==1.0.4.post1
+myst-parser
+matplotlib
+numpy
+torch
+RISE
+ipywidgets
+ipykernel
+jupyterlab

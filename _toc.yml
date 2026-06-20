@@ -1,0 +1,68 @@
+format: jb-book
+root: intro
+chapters:
+  - file: syllabus
+  - file: modules/module-1/overview
+    sections:
+      - file: modules/module-1/book-prose
+      - file: modules/module-1/assignment
+      - file: modules/module-1/slides
+      - file: modules/module-1/narration
+      - file: modules/module-1/instructor-notes
+      - file: notebooks/module-1-lab
+  - file: modules/module-2/overview
+    sections:
+      - file: modules/module-2/book-prose
+      - file: modules/module-2/assignment
+      - file: modules/module-2/slides
+      - file: modules/module-2/narration
+      - file: modules/module-2/instructor-notes
+      - file: notebooks/module-2-lab
+  - file: modules/module-3/overview
+    sections:
+      - file: modules/module-3/book-prose
+      - file: modules/module-3/assignment
+      - file: modules/module-3/slides
+      - file: modules/module-3/narration
+      - file: modules/module-3/instructor-notes
+      - file: notebooks/module-3-lab
+  - file: modules/module-4/overview
+    sections:
+      - file: modules/module-4/book-prose
+      - file: modules/module-4/assignment
+      - file: modules/module-4/slides
+      - file: modules/module-4/narration
+      - file: modules/module-4/instructor-notes
+      - file: notebooks/module-4-lab
+  - file: modules/module-5/overview
+    sections:
+      - file: modules/module-5/book-prose
+      - file: modules/module-5/assignment
+      - file: modules/module-5/slides
+      - file: modules/module-5/narration
+      - file: modules/module-5/instructor-notes
+      - file: notebooks/module-5-lab
+  - file: modules/module-6/overview
+    sections:
+      - file: modules/module-6/book-prose
+      - file: modules/module-6/assignment
+      - file: modules/module-6/slides
+      - file: modules/module-6/narration
+      - file: modules/module-6/instructor-notes
+      - file: notebooks/module-6-lab
+  - file: modules/module-7/overview
+    sections:
+      - file: modules/module-7/book-prose
+      - file: modules/module-7/assignment
+      - file: modules/module-7/slides
+      - file: modules/module-7/narration
+      - file: modules/module-7/instructor-notes
+      - file: notebooks/module-7-lab
+  - file: modules/module-8/overview
+    sections:
+      - file: modules/module-8/book-prose
+      - file: modules/module-8/assignment
+      - file: modules/module-8/slides
+      - file: modules/module-8/narration
+      - file: modules/module-8/instructor-notes
+      - file: notebooks/module-8-lab

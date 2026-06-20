@@ -1,0 +1,36 @@
+name: Build Book Exports
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exports:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install -y latexmk texlive-latex-extra texlive-fonts-recommended texlive-xetex
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+      - name: Build PDF
+        run: jupyter-book build . --builder pdflatex
+      - name: Build EPUB
+        run: jupyter-book build . --builder epub
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ains6101-pdf
+          path: _build/latex/*.pdf
+      - name: Upload EPUB artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ains6101-epub
+          path: _build/epub/*.epub

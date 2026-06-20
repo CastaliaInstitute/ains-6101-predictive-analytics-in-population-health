@@ -1,0 +1,54 @@
+name: Create Student Assignment Repos
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_org:
+        description: "Aurnova GitHub organization"
+        required: true
+        default: "Aurnova"
+      course_code:
+        description: "Course code"
+        required: true
+        default: "ain6003"
+      cohort:
+        description: "Cohort slug, e.g. fall2026"
+        required: true
+      module:
+        description: "Module number, e.g. 1"
+        required: true
+      roster_path:
+        description: "Roster CSV path"
+        required: true
+        default: "rosters/current.csv"
+      dry_run:
+        description: "Print planned operations without changing GitHub"
+        required: true
+        type: boolean
+        default: true
+
+jobs:
+  create-student-repos:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Create student assignment repos
+        env:
+          GH_TOKEN: ${{ secrets.AURNOVA_GH_TOKEN }}
+        run: |
+          args=(
+            --target-org "${{ inputs.target_org }}"
+            --course-code "${{ inputs.course_code }}"
+            --cohort "${{ inputs.cohort }}"
+            --module "${{ inputs.module }}"
+            --roster-path "${{ inputs.roster_path }}"
+          )
+          if [[ "${{ inputs.dry_run }}" == "true" ]]; then
+            args+=(--dry-run)
+          fi
+          python scripts/aurnova/create_student_assignment_repos.py "${args[@]}"
