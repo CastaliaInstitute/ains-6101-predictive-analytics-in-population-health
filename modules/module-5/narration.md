@@ -2,12 +2,17 @@
 
 ## Opening
 
-Introduce **Equity and social determinants** and restate the essential question: How do models account for structural health drivers?
+Open with the professional setting: a population health team prioritizing outreach for patients with elevated near-term risk. Ask students what decision is being made, who is affected, and what evidence would be persuasive to a skeptical reviewer.
 
 ## Middle
 
-Move from definitions to examples, then from examples to limits. Anchor discussion in the course domain and require students to identify evidence, assumptions, and risks.
+Move through the module in four passes:
+
+1. Define **Equity and social determinants** in the context of Predictive Analytics in Population Health.
+2. Walk through the lab as a proxy-data exercise, emphasizing what it can and cannot show.
+3. Compare a baseline with an AI-enabled or more sophisticated alternative.
+4. Translate the result into stakeholder language: recommendation, risk, mitigation, and next evidence.
 
 ## Closing
 
-Connect the lab to the assignment. Remind students that graduate-level work must defend choices, not merely report outputs.
+Close by returning to the module artifact: **risk stratification brief with equity checks, intervention criteria, and monitoring plan focused on equity and social determinants: Audit a model plan for equity risks.**. Students should leave knowing exactly what artifact they are producing and how it will be judged.

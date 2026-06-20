@@ -2,12 +2,17 @@
 
 ## Opening
 
-Introduce **Causal inference and confounding** and restate the essential question: Why is prediction not the same as cause?
+Open with the professional setting: a population health team prioritizing outreach for patients with elevated near-term risk. Ask students what decision is being made, who is affected, and what evidence would be persuasive to a skeptical reviewer.
 
 ## Middle
 
-Move from definitions to examples, then from examples to limits. Anchor discussion in the course domain and require students to identify evidence, assumptions, and risks.
+Move through the module in four passes:
+
+1. Define **Causal inference and confounding** in the context of Predictive Analytics in Population Health.
+2. Walk through the lab as a proxy-data exercise, emphasizing what it can and cannot show.
+3. Compare a baseline with an AI-enabled or more sophisticated alternative.
+4. Translate the result into stakeholder language: recommendation, risk, mitigation, and next evidence.
 
 ## Closing
 
-Connect the lab to the assignment. Remind students that graduate-level work must defend choices, not merely report outputs.
+Close by returning to the module artifact: **risk stratification brief with equity checks, intervention criteria, and monitoring plan focused on causal inference and confounding: Analyze confounding in a public-health scenario.**. Students should leave knowing exactly what artifact they are producing and how it will be judged.
